@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Campus Lost & Found</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.18), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.15), transparent 30%),
+                #f7f8fc;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            max-width: 1050px;
+            min-height: 650px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: white;
+
+            border-radius: 28px;
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(15, 23, 42, 0.12);
+        }
+
+        /* LEFT */
+
+        .welcome-section {
+            position: relative;
+
+            padding: 55px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #6366f1 55%,
+                    #0ea5e9
+                );
+        }
+
+        .welcome-section::before {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            top: -80px;
+            right: -80px;
+        }
+
+        .welcome-section::after {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.07);
+
+            bottom: -60px;
+            left: -50px;
+        }
+
+        .brand {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 19px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(255, 255, 255, 0.16);
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            border-radius: 12px;
+
+            font-size: 22px;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-content h1 {
+            font-size: 44px;
+
+            line-height: 1.12;
+
+            margin-bottom: 20px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .welcome-content p {
+            max-width: 410px;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .features {
+            position: relative;
+            z-index: 2;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* RIGHT */
+
+        .register-section {
+            padding: 50px 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-box {
+            width: 100%;
+            max-width: 390px;
+        }
+
+        .register-header {
+            margin-bottom: 30px;
+        }
+
+        .register-header h2 {
+            font-size: 32px;
+
+            color: #111827;
+
+            margin-bottom: 9px;
+        }
+
+        .register-header p {
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #374151;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+
+            color: #9ca3af;
+
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 14px 15px 14px 45px;
+
+            border: 1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            background: #f9fafb;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.25s;
+        }
+
+        input:focus {
+            border-color: #6366f1;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .password-wrapper input {
+            padding-right: 48px;
+        }
+
+        .toggle-password {
+            position: absolute;
+
+            right: 14px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            color: #9ca3af;
+        }
+
+        .toggle-password:hover {
+            color: #4f46e5;
+        }
+
+        /* PASSWORD STRENGTH */
+
+        .password-strength {
+            margin-top: 8px;
+
+            font-size: 12px;
+
+            color: #9ca3af;
+        }
+
+        /* BUTTON */
+
+        .register-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #4f46e5,
+                    #6366f1
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(79, 70, 229, 0.25);
+
+            transition: 0.25s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(79, 70, 229, 0.32);
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+        }
+
+        /* MESSAGE */
+
+        .message {
+            min-height: 20px;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        /* LOGIN */
+
+        .login-text {
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .login-text a {
+            color: #4f46e5;
+
+            text-decoration: none;
+
+            font-weight: 700;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* HOME */
+
+        .back-home {
+            display: block;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+        .back-home:hover {
+            color: #4f46e5;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+
+            .page-wrapper {
+                grid-template-columns: 1fr;
+
+                max-width: 520px;
+            }
+
+            .welcome-section {
+                display: none;
+            }
+
+            .register-section {
+                padding: 45px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .page-wrapper {
+                border-radius: 20px;
+            }
+
+            .register-section {
+                padding: 35px 22px;
+            }
+
+            .register-header h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+
+        <!-- LEFT -->
+
+        <section class="welcome-section">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🎓
+                </div>
+
+                Campus Lost & Found
+
+            </div>
+
+
+            <div class="welcome-content">
+
+                <h1>
+                    Join Your<br>
+                    Campus! 🎓
+                </h1>
+
+                <p>
+                    Create your account and become part of a
+                    community that helps lost items find their
+                    way back to their owners.
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+                <div class="feature">
+
+                    <span class="feature-icon">
+                        🔎
+                    </span>
+
+                    <span>
+                        Find your lost belongings
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span class="feature-icon">
+                        🤝
+                    </span>
+
+                    <span>
+                        Help other students
+                    </span>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span class="feature-icon">
+                        🔒
+                    </span>
+
+                    <span>
+                        Your password is securely protected
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT -->
+
+        <section class="register-section">
+
+            <div class="register-box">
+
+                <div class="register-header">
+
+                    <h2>
+                        Create account
+                    </h2>
+
+                    <p>
+                        Sign up to start using Campus Lost & Found.
+                    </p>
+
+                </div>
+
+
+                <form id="registerForm">
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉️
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="you@example.com"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper password-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Create a password"
+                                minlength="6"
+                                required>
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                onclick="togglePassword('password', this)">
+
+                                👁️
+
+                            </button>
+
+                        </div>
+
+                        <div
+                            class="password-strength"
+                            id="passwordStrength">
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div class="input-wrapper password-wrapper">
+
+                            <span class="input-icon">
+                                🔐
+                            </span>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                minlength="6"
+                                required>
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                onclick="togglePassword('confirmPassword', this)">
+
+                                👁️
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="register-btn">
+
+                        Create Account →
+
+                    </button>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        class="message"
+                        id="message">
+                    </div>
+
+                </form>
+
+
+                <div class="login-text">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Sign in
+                    </a>
+
+                </div>
+
+
+                <a
+                    href="index.html"
+                    class="back-home">
+
+                    ← Back to Home
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <script>
+
+        function togglePassword(id, button) {
+
+            const input =
+                document.getElementById(id);
+
+            if (input.type === "password") {
+
+                input.type = "text";
+
+                button.textContent = "🙈";
+
+            } else {
+
+                input.type = "password";
+
+                button.textContent = "👁️";
+
+            }
+        }
+
+
+        const password =
+            document.getElementById("password");
+
+        const strength =
+            document.getElementById("passwordStrength");
+
+
+        password.addEventListener("input", function () {
+
+            const value = password.value;
+
+            if (value.length === 0) {
+
+                strength.textContent = "";
+
+            } else if (value.length < 6) {
+
+                strength.textContent =
+                    "Password must be at least 6 characters";
+
+            } else if (value.length < 8) {
+
+                strength.textContent =
+                    "Password strength: Medium";
+
+            } else {
+
+                strength.textContent =
+                    "Password strength: Strong";
+
+            }
+
+        });
+
+    </script>
+    <script src="register.js"></script>
+
+</body>
+
+</html>

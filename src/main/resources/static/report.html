@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind | Report Item</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <h2>
+                CampusFind
+            </h2>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="report.html">
+            Report Item
+        </a>
+
+        <a href="items.html">
+            Browse Items
+        </a>
+
+    </nav>
+
+
+    <div class="auth-area" id="authArea">
+
+        <a href="login.html" class="auth-link">
+            Sign In
+        </a>
+
+        <a href="register.html"
+           class="auth-link register-link">
+
+            Register
+
+        </a>
+
+    </div>
+
+
+    <div class="user-area" id="userArea">
+
+        <div class="user-badge" id="userInitial">
+            U
+        </div>
+
+        <span class="welcome-user" id="welcomeUser">
+            Hi, User 👋
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     REPORT SECTION
+========================= -->
+
+<section class="report-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            REPORT AN ITEM
+        </span>
+
+        <h2>
+            Help the campus community
+        </h2>
+
+        <p>
+            Report a lost or found item with a few simple details.
+        </p>
+
+    </div>
+
+
+    <div class="form-card">
+
+        <form id="itemForm">
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Item Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="itemName"
+                        placeholder="e.g. Black Wallet"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Item Type
+                    </label>
+
+                    <select
+                        id="type"
+                        required>
+
+                        <option value="">
+                            Select type
+                        </option>
+
+                        <option value="LOST">
+                            I Lost It
+                        </option>
+
+                        <option value="FOUND">
+                            I Found It
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        required>
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Electronics">
+                            Electronics
+                        </option>
+
+                        <option value="Personal">
+                            Personal
+                        </option>
+
+                        <option value="Books">
+                            Books
+                        </option>
+
+                        <option value="Documents">
+                            Documents
+                        </option>
+
+                        <option value="Accessories">
+                            Accessories
+                        </option>
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="e.g. College Library"
+                        required>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="5"
+                    placeholder="Describe the item, where you lost/found it, colour, identifying marks etc."
+                    required></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                Submit Report →
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <strong>
+                CampusFind
+            </strong>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <p>
+        Making campus life a little easier,
+        one lost item at a time.
+    </p>
+
+
+    <span class="copyright">
+        © 2026 CampusFind. Built for students.
+    </span>
+
+</footer>
+
+
+
+<script src="script.js?v=3"></script>
+
+
+<script>
+
+    function checkLoggedInUser() {
+
+        const userData =
+            localStorage.getItem("loggedInUser");
+
+        const authArea =
+            document.getElementById("authArea");
+
+        const userArea =
+            document.getElementById("userArea");
+
+        const welcomeUser =
+            document.getElementById("welcomeUser");
+
+        const userInitial =
+            document.getElementById("userInitial");
+
+
+        if (userData) {
+
+            try {
+
+                const user =
+                    JSON.parse(userData);
+
+                authArea.style.display = "none";
+
+                userArea.style.display = "flex";
+
+                welcomeUser.textContent =
+                    "Hi, " + user.name + " 👋";
+
+
+                if (user.name) {
+
+                    userInitial.textContent =
+                        user.name.charAt(0).toUpperCase();
+
+                }
+
+            } catch (error) {
+
+                localStorage.removeItem("loggedInUser");
+
+            }
+
+        } else {
+
+            authArea.style.display = "flex";
+
+            userArea.style.display = "none";
+
+        }
+
+    }
+
+
+    function logoutUser() {
+
+        localStorage.removeItem("loggedInUser");
+
+        alert("✅ Logged out successfully");
+
+        window.location.href = "index.html";
+
+    }
+
+
+    checkLoggedInUser();
+
+</script>
+
+
+</body>
+</html>

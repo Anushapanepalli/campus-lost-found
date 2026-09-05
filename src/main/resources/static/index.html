@@ -1,0 +1,494 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind | Home</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        .auth-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .auth-link {
+            text-decoration: none;
+            color: #374151;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 14px;
+            border-radius: 9px;
+            transition: 0.25s;
+        }
+
+        .auth-link:hover {
+            background: #f3f4ff;
+            color: #4f46e5;
+        }
+
+        .register-link {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .register-link:hover {
+            background: #4338ca;
+            color: white;
+        }
+
+        .user-area {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .welcome-user {
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .logout-btn {
+            border: none;
+            padding: 9px 15px;
+            border-radius: 9px;
+            background: #ef4444;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .user-badge {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .navbar nav {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .auth-area,
+            .user-area {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar nav {
+                gap: 10px;
+            }
+
+            .navbar nav a {
+                font-size: 12px;
+            }
+
+            .welcome-user {
+                display: none;
+            }
+
+            .auth-link {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <h2>
+                CampusFind
+            </h2>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="report.html">
+            Report Item
+        </a>
+
+        <a href="items.html">
+            Browse Items
+        </a>
+
+    </nav>
+
+
+    <!-- AUTH -->
+
+    <div class="auth-area" id="authArea">
+
+        <a href="login.html" class="auth-link">
+            Sign In
+        </a>
+
+        <a href="register.html"
+           class="auth-link register-link">
+
+            Register
+
+        </a>
+
+    </div>
+
+
+    <!-- LOGGED USER -->
+
+    <div class="user-area" id="userArea">
+
+        <div class="user-badge" id="userInitial">
+            U
+        </div>
+
+        <span class="welcome-user" id="welcomeUser">
+            Hi, User 👋
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     HOME / HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            ✦ Campus Community Platform
+        </div>
+
+
+        <h1>
+
+            Lost something?<br>
+
+            <span>
+                Let's find it.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            A smarter way for students to report, discover and
+            reconnect with lost and found items across campus.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <button
+                class="primary-btn"
+                onclick="goToReport()">
+
+                + Report an Item
+
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="goToItems()">
+
+                Browse Items →
+
+            </button>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div>
+
+                <strong id="totalItems">
+                    0
+                </strong>
+
+                <span>
+                    Items Reported
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    24/7
+                </strong>
+
+                <span>
+                    Campus Access
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    100%
+                </strong>
+
+                <span>
+                    Student Friendly
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO CARD -->
+
+    <div class="hero-card">
+
+        <div class="floating-icon">
+            🔍
+        </div>
+
+
+        <h3>
+            Find what you lost
+        </h3>
+
+
+        <p>
+
+            Search through items reported by students
+            across your campus.
+
+        </p>
+
+
+        <div id="heroItems"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <strong>
+                CampusFind
+            </strong>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <p>
+
+        Making campus life a little easier,
+        one lost item at a time.
+
+    </p>
+
+
+    <span class="copyright">
+
+        © 2026 CampusFind. Built for students.
+
+    </span>
+
+</footer>
+
+
+
+<script src="script.js?v=3"></script>
+
+
+<script>
+
+    function goToReport() {
+
+        window.location.href = "report.html";
+
+    }
+
+
+    function goToItems() {
+
+        window.location.href = "items.html";
+
+    }
+
+
+    function checkLoggedInUser() {
+
+        const userData =
+            localStorage.getItem("loggedInUser");
+
+        const authArea =
+            document.getElementById("authArea");
+
+        const userArea =
+            document.getElementById("userArea");
+
+        const welcomeUser =
+            document.getElementById("welcomeUser");
+
+        const userInitial =
+            document.getElementById("userInitial");
+
+
+        if (userData) {
+
+            try {
+
+                const user =
+                    JSON.parse(userData);
+
+                authArea.style.display = "none";
+
+                userArea.style.display = "flex";
+
+
+                welcomeUser.textContent =
+                    "Hi, " + user.name + " 👋";
+
+
+                if (user.name) {
+
+                    userInitial.textContent =
+                        user.name.charAt(0).toUpperCase();
+
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Invalid user data",
+                    error
+                );
+
+                localStorage.removeItem(
+                    "loggedInUser"
+                );
+
+            }
+
+        } else {
+
+            authArea.style.display = "flex";
+
+            userArea.style.display = "none";
+
+        }
+
+    }
+
+
+    function logoutUser() {
+
+        localStorage.removeItem("loggedInUser");
+
+        alert("✅ Logged out successfully");
+
+        window.location.href = "index.html";
+
+    }
+
+
+    checkLoggedInUser();
+
+</script>
+
+
+</body>
+</html>

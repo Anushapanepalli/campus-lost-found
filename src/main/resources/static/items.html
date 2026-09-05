@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusFind | Browse Items</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <h2>
+                CampusFind
+            </h2>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="report.html">
+            Report Item
+        </a>
+
+        <a href="items.html">
+            Browse Items
+        </a>
+
+    </nav>
+
+
+    <div class="auth-area" id="authArea">
+
+        <a href="login.html" class="auth-link">
+            Sign In
+        </a>
+
+        <a href="register.html"
+           class="auth-link register-link">
+
+            Register
+
+        </a>
+
+    </div>
+
+
+    <div class="user-area" id="userArea">
+
+        <div class="user-badge" id="userInitial">
+            U
+        </div>
+
+        <span class="welcome-user" id="welcomeUser">
+            Hi, User 👋
+        </span>
+
+        <button
+            class="logout-btn"
+            onclick="logoutUser()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     ITEMS SECTION
+========================= -->
+
+<section class="items-section">
+
+    <div class="section-heading">
+
+        <span class="section-label">
+            CAMPUS ITEMS
+        </span>
+
+        <h2>
+            Recently Reported Items
+        </h2>
+
+        <p>
+            Browse lost and found items reported by students.
+        </p>
+
+    </div>
+
+
+
+    <!-- SEARCH -->
+
+    <div class="search-bar">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔎 Search items...">
+
+
+        <select id="filterType">
+
+            <option value="ALL">
+                All Items
+            </option>
+
+            <option value="LOST">
+                Lost
+            </option>
+
+            <option value="FOUND">
+                Found
+            </option>
+
+        </select>
+
+    </div>
+
+
+
+    <!-- ITEMS -->
+
+    <div
+        id="itemsContainer"
+        class="items-grid">
+
+        <!-- Items loaded from Spring Boot -->
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <div class="logo-icon">
+            CF
+        </div>
+
+        <div>
+
+            <strong>
+                CampusFind
+            </strong>
+
+            <span>
+                Lost & Found Portal
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <p>
+        Making campus life a little easier,
+        one lost item at a time.
+    </p>
+
+
+    <span class="copyright">
+        © 2026 CampusFind. Built for students.
+    </span>
+
+</footer>
+
+
+
+<script src="script.js?v=3"></script>
+
+
+<script>
+
+    function checkLoggedInUser() {
+
+        const userData =
+            localStorage.getItem("loggedInUser");
+
+        const authArea =
+            document.getElementById("authArea");
+
+        const userArea =
+            document.getElementById("userArea");
+
+        const welcomeUser =
+            document.getElementById("welcomeUser");
+
+        const userInitial =
+            document.getElementById("userInitial");
+
+
+        if (userData) {
+
+            try {
+
+                const user =
+                    JSON.parse(userData);
+
+                authArea.style.display = "none";
+
+                userArea.style.display = "flex";
+
+                welcomeUser.textContent =
+                    "Hi, " + user.name + " 👋";
+
+
+                if (user.name) {
+
+                    userInitial.textContent =
+                        user.name.charAt(0).toUpperCase();
+
+                }
+
+            } catch (error) {
+
+                localStorage.removeItem("loggedInUser");
+
+            }
+
+        } else {
+
+            authArea.style.display = "flex";
+
+            userArea.style.display = "none";
+
+        }
+
+    }
+
+
+    function logoutUser() {
+
+        localStorage.removeItem("loggedInUser");
+
+        alert("✅ Logged out successfully");
+
+        window.location.href = "index.html";
+
+    }
+
+
+    checkLoggedInUser();
+
+</script>
+
+
+</body>
+</html>
