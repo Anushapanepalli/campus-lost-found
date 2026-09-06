@@ -196,8 +196,6 @@ MySQL stores user and lost/found item information.
 
 ## 8. Project Structure
 
-## 8. Project Structure
-
 ```text
 campus-lost-found/
 │
@@ -312,7 +310,7 @@ mvnw.cmd spring-boot:run
 
 After the Spring Boot server starts, open the application in a browser.
 
-http://localhost:8080
+http://localhost:8081
 
 ---
 
