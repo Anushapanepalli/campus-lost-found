@@ -196,39 +196,25 @@ MySQL stores user and lost/found item information.
 
 ## 8. Project Structure
 
-campus-lost-found
+## 8. Project Structure
+
+```text
+campus-lost-found/
 │
 ├── pom.xml
-├── mvnw
-├── mvnw.cmd
+├── README.md
 │
-└── src
-    ├── main
-    │   ├── java
-    │   │   └── com.example.campus_lost_found
-    │   │       ├── config
-    │   │       │   └── SecurityConfig.java
-    │   │       │
-    │   │       ├── controller
-    │   │       │   ├── ItemController.java
-    │   │       │   └── UserController.java
-    │   │       │
-    │   │       ├── entity
-    │   │       │   ├── Item.java
-    │   │       │   └── User.java
-    │   │       │
-    │   │       ├── repository
-    │   │       │   ├── ItemRepository.java
-    │   │       │   └── UserRepository.java
-    │   │       │
-    │   │       ├── service
-    │   │       │   ├── ItemService.java
-    │   │       │   └── UserService.java
-    │   │       │
-    │   │       └── CampusLostFoundApplication.java
+└── src/
+    ├── main/
+    │   ├── java/
+    │   │   └── com.example.campus_lost_found/
+    │   │       ├── controller/
+    │   │       ├── entity/
+    │   │       ├── repository/
+    │   │       └── service/
     │   │
-    │   └── resources
-    │       ├── static
+    │   └── resources/
+    │       ├── static/
     │       │   ├── index.html
     │       │   ├── report.html
     │       │   ├── items.html
@@ -241,9 +227,16 @@ campus-lost-found
     │       │
     │       └── application.properties
     │
-    └── test
-        └── java
-            └── CampusLostFoundApplicationTests.java
+    └── test/
+```
+### Main Components
+
+- **Controller** – Handles HTTP requests from the frontend.
+- **Service** – Contains the application business logic.
+- **Repository** – Communicates with the MySQL database using JPA.
+- **Entity** – Represents database tables such as User and Item.
+- **Static** – Contains the HTML, CSS, and JavaScript frontend files.
+- **Config** – Contains application security configuration.
 
 ---
 
